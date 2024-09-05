@@ -1,6 +1,8 @@
 VAGRANT_BOX               = "ubuntu/jammy64"
 VAGRANT_BOX_VERSION       = "12.20240503.1"
 
+NODE_MASTER_CPU           = 2
+NODE_MASTER_MEMORY        = 4096
 
 Vagrant.configure(2) do |config|
   config.vm.box =  VAGRANT_BOX
