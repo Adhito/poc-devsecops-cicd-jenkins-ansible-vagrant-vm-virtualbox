@@ -11,7 +11,11 @@ Vagrant.configure(2) do |config|
     node_master.vm.network "forwarded_port", guest: 8080, host: 8080
     node_master.vm.network "private_network", ip: "192.168.56.13"
     node_master.vm.hostname = "DEVCICDNODEMASTER-01"
-
+    node_master.vm.provider "virtualbox" do |vb|
+      vb.name   = "DEVCICDNODEMASTER-01-ENV01"
+      vb.cpus   = NODE_MASTER_CPU
+      vb.memory = NODE_MASTER_MEMORY
+      
     end
   end
 
