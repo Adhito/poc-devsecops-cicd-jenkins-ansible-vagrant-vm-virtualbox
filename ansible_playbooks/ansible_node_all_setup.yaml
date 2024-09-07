@@ -20,3 +20,17 @@
       ansible.builtin.apt_repository:
         repo: deb https://packages.adoptium.net/artifactory/deb focal main
         state: present
+    - name: Install Generic Software 
+      apt:
+        name:
+          - temurin-17-jdk
+          - apt-transport-https 
+          - ca-certificates 
+          - curl 
+          - git
+          - gnupg
+          - gnupg-agent 
+          - software-properties-common
+          - unzip
+          - wget
+        state: latest
