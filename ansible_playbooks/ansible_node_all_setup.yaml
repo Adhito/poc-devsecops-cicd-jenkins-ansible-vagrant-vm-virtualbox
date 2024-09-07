@@ -1,0 +1,6 @@
+---
+- name: "Stage : Setup Generic Software On All Nodes"
+  hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
