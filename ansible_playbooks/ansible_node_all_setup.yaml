@@ -1,0 +1,36 @@
+---
+- name: "Stage : Setup Generic Software On All Nodes"
+  hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Update hosts
+      lineinfile:
+        path: "/etc/hosts"
+        regexp: ".*\t{{ hostvars[item]['ansible_hostname']}}\t{{ hostvars[item]['ansible_hostname']}}"
+        line: "{{ hostvars[item]['ansible_ssh_host'] }}\t{{ hostvars[item]['ansible_hostname']}}\t{{ hostvars[item]['ansible_hostname']}}"
+        state: present
+        backup: yes
+      with_items: "{{ ansible_play_batch }}"       
+    - name: Create & Add Adoptium apt key
+      ansible.builtin.apt_key:
+        url: https://packages.adoptium.net/artifactory/api/gpg/key/public
+        state: present
+    - name: Create & Add Adoptium repository
+      ansible.builtin.apt_repository:
+        repo: deb https://packages.adoptium.net/artifactory/deb focal main
+        state: present
+    - name: Install Generic Software 
+      apt:
+        name:
+          - temurin-17-jdk
+          - apt-transport-https 
+          - ca-certificates 
+          - curl 
+          - git
+          - gnupg
+          - gnupg-agent 
+          - software-properties-common
+          - unzip
+          - wget
+        state: latest
