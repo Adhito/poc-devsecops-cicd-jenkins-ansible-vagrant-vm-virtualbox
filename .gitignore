@@ -1,0 +1,5 @@
+.vagrant/
+.DS_Store
+.dccache
+ansible_private_keys/node_master_private_key
+ansible_private_keys/node_worker_private_key
