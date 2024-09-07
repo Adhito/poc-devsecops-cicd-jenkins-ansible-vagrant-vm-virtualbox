@@ -11,4 +11,12 @@
         line: "{{ hostvars[item]['ansible_ssh_host'] }}\t{{ hostvars[item]['ansible_hostname']}}\t{{ hostvars[item]['ansible_hostname']}}"
         state: present
         backup: yes
-      with_items: "{{ ansible_play_batch }}" 
+      with_items: "{{ ansible_play_batch }}"       
+    - name: Create & Add Adoptium apt key
+      ansible.builtin.apt_key:
+        url: https://packages.adoptium.net/artifactory/api/gpg/key/public
+        state: present
+    - name: Create & Add Adoptium repository
+      ansible.builtin.apt_repository:
+        repo: deb https://packages.adoptium.net/artifactory/deb focal main
+        state: present
