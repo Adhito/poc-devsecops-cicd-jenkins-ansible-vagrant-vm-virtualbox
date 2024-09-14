@@ -25,6 +25,14 @@
       ansible.builtin.apt_repository:
         repo: deb https://pkg.jenkins.io/debian-stable binary/
         state: present
+    - name: Install Jenkins
+      apt:
+        name:
+          - jenkins=2.401.3
+    - name: Stop Jenkins Systemd
+      systemd:
+        name: jenkins
+        state: stopped
     - name: Start Jenkins Service
       systemd:
         name: jenkins
