@@ -1,0 +1,10 @@
+---
+- name: "Stage : Setup Software & Configuration On Node Master"
+  hosts: dev_cicd_node_masters
+  become: yes
+  tasks:
+    - name: Start Jenkins Service
+      systemd:
+        name: jenkins
+        state: restarted
+        enabled: yes
