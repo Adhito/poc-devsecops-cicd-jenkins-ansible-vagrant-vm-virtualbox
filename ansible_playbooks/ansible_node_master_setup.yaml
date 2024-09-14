@@ -37,6 +37,17 @@
       file:
         state: absent
         path: /var/lib/jenkins
+    - name: Create Directories For Jenkins
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: jenkins
+        group: jenkins
+        recurse: yes
+      with_items:
+        - '/var/cache/jenkins/tmp'
+        - '/var/cache/jenkins/heapdumps'
+        - '/var/lib/jenkins'
 
     - name: Start Jenkins Service
       systemd:
