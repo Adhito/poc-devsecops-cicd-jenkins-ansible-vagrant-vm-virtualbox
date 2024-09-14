@@ -17,6 +17,10 @@
         rule: allow
         port: '22'
         proto: tcp
+    - name: Create & Add Jenkins Stable Release Apt Key
+      ansible.builtin.apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        state: present
     - name: Start Jenkins Service
       systemd:
         name: jenkins
