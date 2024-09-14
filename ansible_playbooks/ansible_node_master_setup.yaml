@@ -57,6 +57,10 @@
         recurse: yes
       with_items:
         - '/etc/systemd/system/jenkins.service.d'
+    - name: Create Limits File
+      copy:
+        dest: "/etc/systemd/system/jenkins.service.d/override.conf"
+        src: "override.conf"
 
     - name: Start Jenkins Service
       systemd:
