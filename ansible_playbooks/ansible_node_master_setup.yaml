@@ -17,6 +17,27 @@
         rule: allow
         port: '22'
         proto: tcp
+    - name: Create & Add Jenkins Stable Release Apt Key
+      ansible.builtin.apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        state: present
+    - name: Create & Add Jenkins Stable Release Deb Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
+    - name: Install Jenkins
+      apt:
+        name:
+          - jenkins=2.401.3
+    - name: Stop Jenkins Systemd
+      systemd:
+        name: jenkins
+        state: stopped
+    - name: Delete JENKINS_HOME directory
+      file:
+        state: absent
+        path: /var/lib/jenkins
+
     - name: Start Jenkins Service
       systemd:
         name: jenkins
