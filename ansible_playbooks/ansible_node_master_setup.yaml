@@ -3,6 +3,10 @@
   hosts: dev_cicd_node_masters
   become: yes
   tasks:
+    - name: Create Policy To Deny Everything And Enable UFW
+      community.general.ufw:
+        state: enabled
+        policy: deny
     - name: Start Jenkins Service
       systemd:
         name: jenkins
