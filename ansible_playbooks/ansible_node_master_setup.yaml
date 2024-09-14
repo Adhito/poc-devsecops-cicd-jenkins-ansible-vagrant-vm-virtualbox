@@ -21,6 +21,10 @@
       ansible.builtin.apt_key:
         url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
         state: present
+    - name: Create & Add Jenkins Stable Release Deb Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
     - name: Start Jenkins Service
       systemd:
         name: jenkins
