@@ -69,3 +69,8 @@
       get_url:
         url: "https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz"
         dest: /tmp/apache-maven-3.8.6-bin.tar.gz
+    - name: Create & Extract Maven Binary
+      unarchive:
+        src: /tmp/apache-maven-3.8.6-bin.tar.gz
+        dest: /opt/maven/
+        remote_src: yes
