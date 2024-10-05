@@ -12,3 +12,12 @@
         rule: allow
         port: '22'
         proto: tcp
+    - name: Delete & Remove Any Docker Engine Installation
+      apt:
+        name:
+          - docker 
+          - docker-engine 
+          - docker.io 
+          - containerd 
+          - runc 
+        state: absent
