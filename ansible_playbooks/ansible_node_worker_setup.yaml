@@ -45,4 +45,5 @@
         name: "{{ ansible_user }}"
         groups: docker
         append: yes
-        
+    - name: Update & Execute SSH Reset In Order To Reflect The $USER Group Changes
+      meta: reset_connection
