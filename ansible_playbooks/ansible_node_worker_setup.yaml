@@ -47,3 +47,8 @@
         append: yes
     - name: Update & Execute SSH Reset In Order To Reflect The $USER Group Changes
       meta: reset_connection
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: restarted   
+        enabled: yes
