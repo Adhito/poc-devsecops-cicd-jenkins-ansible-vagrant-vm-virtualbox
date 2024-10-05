@@ -61,3 +61,7 @@
           - tar
         state: present
         update_cache: yes
+    - name: Create directory for Maven installation
+      file:
+        path: /opt/maven
+        state: directory
