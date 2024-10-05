@@ -40,4 +40,9 @@
       group:
         name: docker
         state: present
+    - name: Create & Add $USER To Docker Group
+      user: 
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
         
