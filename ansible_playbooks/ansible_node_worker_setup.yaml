@@ -1,3 +1,9 @@
 - name: "Stage : Setup Software & Configuration On Node Worker"
   hosts: dev_cicd_node_workers
   become: yes
+
+  tasks:
+    - name: Create Policy To Allow Everything And Enable UFW
+      community.general.ufw:
+        state: enabled
+        policy: deny
