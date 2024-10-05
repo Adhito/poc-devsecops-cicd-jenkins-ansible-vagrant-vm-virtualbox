@@ -52,3 +52,50 @@
         name: docker
         state: restarted   
         enabled: yes
+
+
+    - name: Install Prerequisites For Maven 3.8.6
+      apt:
+        name:
+          - wget
+          - tar
+        state: present
+        update_cache: yes
+    - name: Create directory for Maven installation
+      file:
+        path: /opt/maven
+        state: directory
+    - name: Download Maven 3.8.x binary
+      get_url:
+        url: "https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz"
+        dest: /tmp/apache-maven-3.8.6-bin.tar.gz
+    - name: Create & Extract Maven Binary
+      unarchive:
+        src: /tmp/apache-maven-3.8.6-bin.tar.gz
+        dest: /opt/maven/
+        remote_src: yes
+    - name: Create symbolic link for Maven
+      file:
+        src: /opt/maven/apache-maven-3.8.6
+        dest: /opt/maven/latest
+        state: link
+    - name: Create Maven environment variables
+      copy:
+        dest: /etc/profile.d/maven.sh
+        content: |
+          export MAVEN_HOME=/opt/maven/latest
+          export PATH=$PATH:$MAVEN_HOME/bin
+        mode: '0644'
+    - name: Update Maven environment variables and verify Maven version
+      shell: |
+        export MAVEN_HOME=/opt/maven/latest
+        export PATH=$PATH:$MAVEN_HOME/bin
+        mvn -version
+      register: maven_version
+      environment:
+        MAVEN_HOME: /opt/maven/latest
+        PATH: "{{ ansible_env.PATH }}:/opt/maven/latest/bin"
+    - name: Show Maven version
+      debug:
+        msg: "Installed Maven version: {{ maven_version.stdout }}"
+        
