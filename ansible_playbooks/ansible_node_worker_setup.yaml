@@ -65,3 +65,7 @@
       file:
         path: /opt/maven
         state: directory
+    - name: Download Maven 3.8.x binary
+      get_url:
+        url: "https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz"
+        dest: /tmp/apache-maven-3.8.6-bin.tar.gz
