@@ -1,0 +1,54 @@
+- name: "Stage : Setup Software & Configuration On Node Worker"
+  hosts: dev_cicd_node_workers
+  become: yes
+
+  tasks:
+    - name: Create Policy To Allow Everything And Enable UFW
+      community.general.ufw:
+        state: enabled
+        policy: deny
+    - name: Create Policy To Allow Any Traffic To TCP Port 22
+      community.general.ufw:
+        rule: allow
+        port: '22'
+        proto: tcp
+    - name: Delete & Remove Any Docker Engine Installation
+      apt:
+        name:
+          - docker 
+          - docker-engine 
+          - docker.io 
+          - containerd 
+          - runc 
+        state: absent
+    - name: Create & Add Docker-CE Apt Key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Create & Add Docker-CE Deb Repository
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: Install Docker
+      apt:
+        name: 
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: latest
+    - name: Create & Add Docker Group
+      group:
+        name: docker
+        state: present
+    - name: Create & Add $USER To Docker Group
+      user: 
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+    - name: Update & Execute SSH Reset In Order To Reflect The $USER Group Changes
+      meta: reset_connection
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: restarted   
+        enabled: yes
