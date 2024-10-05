@@ -1,0 +1,3 @@
+- name: "Stage : Setup Software & Configuration On Node Worker"
+  hosts: dev_cicd_node_workers
+  become: yes
