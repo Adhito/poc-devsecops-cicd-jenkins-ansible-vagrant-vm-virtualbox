@@ -52,3 +52,12 @@
         name: docker
         state: restarted   
         enabled: yes
+
+
+    - name: Install Prerequisites For Maven 3.8.6
+      apt:
+        name:
+          - wget
+          - tar
+        state: present
+        update_cache: yes
