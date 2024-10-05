@@ -21,3 +21,7 @@
           - containerd 
           - runc 
         state: absent
+    - name: Create & Add Docker-CE Apt Key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
