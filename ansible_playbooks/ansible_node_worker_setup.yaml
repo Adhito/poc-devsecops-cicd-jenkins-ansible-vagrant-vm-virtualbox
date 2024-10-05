@@ -86,4 +86,13 @@
           export MAVEN_HOME=/opt/maven/latest
           export PATH=$PATH:$MAVEN_HOME/bin
         mode: '0644'
-
+    - name: Update Maven environment variables and verify Maven version
+      shell: |
+        export MAVEN_HOME=/opt/maven/latest
+        export PATH=$PATH:$MAVEN_HOME/bin
+        mvn -version
+      register: maven_version
+      environment:
+        MAVEN_HOME: /opt/maven/latest
+        PATH: "{{ ansible_env.PATH }}:/opt/maven/latest/bin"
+        
