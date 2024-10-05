@@ -36,3 +36,8 @@
           - docker-ce-cli
           - containerd.io
         state: latest
+    - name: Create & Add Docker Group
+      group:
+        name: docker
+        state: present
+        
