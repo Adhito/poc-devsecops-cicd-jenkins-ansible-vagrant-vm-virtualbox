@@ -79,4 +79,11 @@
         src: /opt/maven/apache-maven-3.8.6
         dest: /opt/maven/latest
         state: link
+    - name: Create Maven environment variables
+      copy:
+        dest: /etc/profile.d/maven.sh
+        content: |
+          export MAVEN_HOME=/opt/maven/latest
+          export PATH=$PATH:$MAVEN_HOME/bin
+        mode: '0644'
 
