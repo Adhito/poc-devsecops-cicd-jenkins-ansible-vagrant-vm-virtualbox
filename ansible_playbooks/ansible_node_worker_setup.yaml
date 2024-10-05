@@ -7,3 +7,8 @@
       community.general.ufw:
         state: enabled
         policy: deny
+    - name: Create Policy To Allow Any Traffic To TCP Port 22
+      community.general.ufw:
+        rule: allow
+        port: '22'
+        proto: tcp
