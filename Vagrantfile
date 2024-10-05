@@ -9,7 +9,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "DEVCICDNODEMASTER-01-ENV01" do |node_master|
     node_master.vm.network "forwarded_port", guest: 8080, host: 8080
-    node_master.vm.network "private_network", ip: "192.168.56.13"
+    node_master.vm.network "private_network", ip: "192.168.11.10"
     node_master.vm.hostname = "DEVCICDNODEMASTER-01"
     node_master.vm.provider "virtualbox" do |vb|
       vb.name   = "DEVCICDNODEMASTER-01-ENV01"
