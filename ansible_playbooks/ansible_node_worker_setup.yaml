@@ -148,3 +148,9 @@
       apt:
         name: nodejs
         state: present
+    - name: Verify Node.js version
+      command: node -v
+      register: node_version
+    - name: Verify npm version
+      command: npm -v
+      register: npm_version
