@@ -99,3 +99,11 @@
       debug:
         msg: "Installed Maven version: {{ maven_version.stdout }}"
         
+
+    - name: Install Prerequisites For Node 20.17
+      apt:
+        name:
+          - curl
+          - gnupg
+        state: present
+        update_cache: yes
