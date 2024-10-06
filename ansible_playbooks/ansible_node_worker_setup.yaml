@@ -115,3 +115,6 @@
       apt_repository:
         repo: 'deb [signed-by=/usr/share/keyrings/nodesource-archive-keyring.gpg] https://deb.nodesource.com/node_20.x jammy main'
         state: present
+    - name: Update apt cache
+      apt:
+        update_cache: yes
