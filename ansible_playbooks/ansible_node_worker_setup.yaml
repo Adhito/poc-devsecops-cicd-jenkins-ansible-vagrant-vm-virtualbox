@@ -144,3 +144,7 @@
     - name: Update apt cache
       apt:
         update_cache: yes
+    - name: Install Node.js
+      apt:
+        name: nodejs
+        state: present
