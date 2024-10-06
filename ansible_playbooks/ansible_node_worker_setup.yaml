@@ -141,3 +141,6 @@
       command: /tmp/nodesource_setup.sh
       args:
         creates: /etc/apt/sources.list.d/nodesource.list
+    - name: Update apt cache
+      apt:
+        update_cache: yes
