@@ -107,8 +107,11 @@
           - gnupg
         state: present
         update_cache: yes
-    - name: Download NodeSource GPG key
+    - name: Create & Download NodeSource GPG key
       get_url:
         url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
         dest: /usr/share/keyrings/nodesource-archive-keyring.gpg
-        
+    - name: Create & NodeSource APT repository for Node.js 20.17
+      apt_repository:
+        repo: 'deb [signed-by=/usr/share/keyrings/nodesource-archive-keyring.gpg] https://deb.nodesource.com/node_20.x jammy main'
+        state: present
