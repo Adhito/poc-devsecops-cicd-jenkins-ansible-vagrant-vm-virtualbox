@@ -118,3 +118,8 @@
     - name: Update apt cache
       apt:
         update_cache: yes
+    - name: Install Node.js 20.17 and NPM
+      apt:
+        name:
+          - nodejs
+        state: present
