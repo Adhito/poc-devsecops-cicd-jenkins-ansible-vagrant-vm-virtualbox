@@ -125,3 +125,10 @@
     #     state: present
 
 
+    - name: Install Prerequisites For Node 20.17
+      apt:
+        name:
+          - curl
+          - gnupg
+        state: present
+        update_cache: yes
