@@ -154,3 +154,9 @@
     - name: Verify npm version
       command: npm -v
       register: npm_version
+    - name: Show Node.js version
+      debug:
+        msg: "Installed Node.js version: {{ node_version.stdout }}"
+    - name: Show npm version
+      debug:
+        msg: "Installed npm version: {{ npm_version.stdout }}"
