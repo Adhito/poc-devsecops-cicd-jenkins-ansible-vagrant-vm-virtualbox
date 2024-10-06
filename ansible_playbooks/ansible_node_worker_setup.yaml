@@ -107,3 +107,8 @@
           - gnupg
         state: present
         update_cache: yes
+    - name: Download NodeSource GPG key
+      get_url:
+        url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
+        dest: /usr/share/keyrings/nodesource-archive-keyring.gpg
+        
